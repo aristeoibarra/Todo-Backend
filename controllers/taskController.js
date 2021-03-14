@@ -4,7 +4,7 @@ const Task = require("../models/Task");
 exports.create = async (req, res) => {
   const { name, description, uid, date } = req.body;
 
-  const task = new Task({
+  let task = new Task({
     name,
     description,
     uid,
@@ -42,16 +42,16 @@ exports.taskById = async (req, res) => {
 exports.update = async (req, res) => {
   const { name, description, uid, date } = req.body;
 
-  const task = new Task({
+  const newTask = {
     name,
     description,
     uid,
     date,
-  });
+  };
 
   try {
-    const newTask = await task.findByIdAndUpdate(req.params.taskId, task);
-    res.send(newTask);
+    await Task.findByIdAndUpdate(req.params.taskId, newTask);
+    res.json({ status: "task updated" });
   } catch (error) {
     res.status(500).send(err.message);
     console.log("Error: " + err.message);
@@ -62,10 +62,9 @@ exports.update = async (req, res) => {
 exports.remove = async (req, res) => {
   try {
     //delereOne()
-    const task = await Task.findByIdAndRemove(req.params.taskId);
-
-    res.task(task);
-  } catch (error) {
+    await Task.findByIdAndRemove(req.params.taskId);
+    res.json({ status: "task deleted" });
+  } catch (err) {
     res.status(500).send(err.message);
     console.log("Error: " + err.message);
   }

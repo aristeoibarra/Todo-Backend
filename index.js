@@ -9,9 +9,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Hello world");
-});
+//RUTES
+app.use("/api/todo", require("./routes/task"));
+app.use("/api/register", require("./routes/register"));
+app.use("/api/login", require("./routes/login"));
 
 //NUMBER PORT
 const port = process.env.PORT || 5000;
