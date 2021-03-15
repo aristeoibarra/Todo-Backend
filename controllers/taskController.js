@@ -8,7 +8,7 @@ exports.create = async (req, res) => {
     name,
     description,
     uid,
-    date,
+    date: new Date()
   });
 
   try {

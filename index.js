@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 //RUTES
-app.use("/api/todo", require("./routes/task"));
+app.use("/api/task", require("./routes/task"));
 app.use("/api/register", require("./routes/register"));
 app.use("/api/login", require("./routes/login"));
 
